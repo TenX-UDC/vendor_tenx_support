@@ -19,7 +19,6 @@
 package com.tenx.support.preferences;
 
 import android.content.Context;
-import androidx.preference.SwitchPreference;
 import android.util.AttributeSet;
 
 public class SystemPropertySwitchPreference extends SwitchPreference {
