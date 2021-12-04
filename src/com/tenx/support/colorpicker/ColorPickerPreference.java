@@ -2,6 +2,7 @@
  * Copyright (C) 2011 Sergey Margaritov
  * Copyright (C) 2013 Slimroms
  * Copyright (C) 2015 The TeamEos Project
+ * Copyright (C) 2020-2021 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +29,8 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.preference.*;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -55,6 +57,7 @@ public class ColorPickerPreference extends Preference implements
     ColorPickerDialog mDialog;
     private int mDefaultValue = Color.BLACK;
     private int mCurrentValue = mDefaultValue;
+    private String mCurrentHexValue;
     private float mDensity = 0;
     private boolean mAlphaSliderEnabled = false;
     private boolean mIsLedColorPicker;
@@ -63,6 +66,7 @@ public class ColorPickerPreference extends Preference implements
     private boolean mShowPreview;
     private boolean mDividerAbove;
     private boolean mDividerBelow;
+    private boolean mAutoSummary = true;
     private EditText mEditText;
 
     //private boolean mIsCrappyLedDevice;
@@ -102,6 +106,8 @@ public class ColorPickerPreference extends Preference implements
             defaultValue = Color.BLACK;
         }
         mCurrentValue = getPersistedInt((Integer) defaultValue);
+        mCurrentHexValue = convertToARGB((Integer) defaultValue);
+        if (mAutoSummary) setSummary(mCurrentHexValue);
         onColorChanged(mCurrentValue);
     }
 
@@ -223,6 +229,8 @@ public class ColorPickerPreference extends Preference implements
     @Override
     public void onColorChanged(int color) {
         mCurrentValue = color;
+        mCurrentHexValue = convertToARGB(color);
+        if (mAutoSummary) setSummary(mCurrentHexValue);
         setPreviewColor();
         persistInt(color);
         try {
@@ -336,6 +344,15 @@ public class ColorPickerPreference extends Preference implements
         }
 
         return Color.argb(alpha, red, green, blue);
+    }
+
+    /**
+     * Toggle Auto Summary (by default it's enabled)
+     *
+     * @param enable
+     */
+    public void setAutoSummaryEnabled(boolean enable) {
+        mAutoSummary = enable;
     }
 
     @Override
