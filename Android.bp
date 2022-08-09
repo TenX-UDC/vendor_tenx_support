@@ -19,3 +19,9 @@ android_library {
     resource_dirs: ["res"],
 
 }
+
+android_library {
+    name: "org.lineageos.platform.internal",
+
+    srcs: ["src_los/**/*.java"],
+}
