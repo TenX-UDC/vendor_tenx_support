@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2016 The CyanogenMod Project
- * Copyright (C) 2018 The LineageOS Project
+ * Copyright (C) 2022 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +21,13 @@ import android.util.AttributeSet;
 
 import android.provider.Settings;
 
-public class SecureSettingListPreference extends SelfRemovingListPreference {
+public class GlobalSettingListPreference extends SelfRemovingListPreference {
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs, int defStyle) {
+    public GlobalSettingListPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
-    public SecureSettingListPreference(Context context, AttributeSet attrs) {
+    public GlobalSettingListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -38,17 +37,18 @@ public class SecureSettingListPreference extends SelfRemovingListPreference {
 
     @Override
     protected boolean isPersisted() {
-        return Settings.Secure.getString(getContext().getContentResolver(), getKey()) != null;
+        return Settings.Global.getString(getContext().getContentResolver(),
+                getKey()) != null;
     }
 
     @Override
     protected void putString(String key, String value) {
-        Settings.Secure.putString(getContext().getContentResolver(), key, value);
+        Settings.Global.putString(getContext().getContentResolver(), key, value);
     }
 
     @Override
     protected String getString(String key, String defaultValue) {
-        String result = Settings.Secure.getString(getContext().getContentResolver(), key);
+        String result = Settings.Global.getString(getContext().getContentResolver(), key);
         return result == null ? defaultValue : result;
     }
 }
