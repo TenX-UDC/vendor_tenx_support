@@ -158,7 +158,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
         }
         mTextContainer = (View) view.findViewById(R.id.text_container);
         mStatusText = (TextView) view.findViewById(R.id.seekBarPrefValue);
-        mStatusText.setText(String.valueOf(mCurrentValue) + mUnits);
+        mStatusText.setText(String.valueOf(mCurrentValue) + " " + mUnits);
 
         if (mAllowEdit) {
             mTextContainer.setOnLongClickListener(new View.OnLongClickListener() {
@@ -243,7 +243,7 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
         // change accepted, store it
         mCurrentValue = newValue;
         if (mStatusText != null) {
-            mStatusText.setText(String.valueOf(newValue) + mUnits);
+            mStatusText.setText(String.valueOf(newValue) + " " + mUnits);
         }
         persistInt(newValue);
     }
