@@ -21,7 +21,7 @@ import android.util.AttributeSet;
 
 import com.tenx.support.R;
 
-public class CustomSwitchPreference extends SwitchPreference {
+public class CustomSwitchPreference extends SwitchPreferenceCompat {
 
     public CustomSwitchPreference(Context context) {
         super(context);

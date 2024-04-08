@@ -21,7 +21,7 @@ package com.tenx.support.preferences;
 import android.content.Context;
 import android.util.AttributeSet;
 
-public class SystemPropertySwitchPreference extends SwitchPreference {
+public class SystemPropertySwitchPreference extends SwitchPreferenceCompat {
 
     public SystemPropertySwitchPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

@@ -21,7 +21,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.provider.Settings;
 
-public class SystemSettingSwitchPreference extends SwitchPreference {
+public class SystemSettingSwitchPreference extends SwitchPreferenceCompat {
 
     public SystemSettingSwitchPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

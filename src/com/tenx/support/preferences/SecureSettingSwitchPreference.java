@@ -21,7 +21,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.provider.Settings;
 
-public class SecureSettingSwitchPreference extends SwitchPreference {
+public class SecureSettingSwitchPreference extends SwitchPreferenceCompat {
 
     public SecureSettingSwitchPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
