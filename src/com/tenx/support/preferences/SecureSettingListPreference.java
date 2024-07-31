@@ -18,11 +18,14 @@
 package com.tenx.support.preferences;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import android.provider.Settings;
 
 public class SecureSettingListPreference extends SelfRemovingListPreference {
+
+    private boolean mAutoSummary = false;
 
     public SecureSettingListPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -30,6 +33,24 @@ public class SecureSettingListPreference extends SelfRemovingListPreference {
 
     public SecureSettingListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    public void setValue(String value) {
+        super.setValue(value);
+        if (mAutoSummary || TextUtils.isEmpty(getSummary())) {
+            setSummary(getEntry(), true);
+        }
+    }
+
+    @Override
+    public void setSummary(CharSequence summary) {
+        setSummary(summary, false);
+    }
+
+    private void setSummary(CharSequence summary, boolean autoSummary) {
+        mAutoSummary = autoSummary;
+        super.setSummary(summary);
     }
 
     public int getIntValue(int defValue) {
