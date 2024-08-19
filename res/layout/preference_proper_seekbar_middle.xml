@@ -22,11 +22,11 @@
     android:gravity="center_vertical"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="3dp"
     android:layout_marginStart="15dp"
     android:layout_marginEnd="15dp"
     android:padding="15dp"
-    android:background="@drawable/tenx_card"
+    android:background="@drawable/tenx_card_middle"
     android:clipToPadding="false">
 
     <LinearLayout
@@ -40,12 +40,14 @@
         android:paddingEnd="12dp"
         android:paddingTop="4dp"
         android:paddingBottom="4dp">
+
         <com.android.internal.widget.PreferenceImageView
             android:id="@android:id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="48dp"
             android:maxHeight="48dp" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -62,9 +64,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="?android:attr/textColorPrimary"
             android:ellipsize="marquee" />
 
         <TextView

@@ -94,7 +94,26 @@ public class ColorPickerPreference extends Preference implements
     public ColorPickerPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        setLayoutResource(R.layout.preference_material_color_picker_settings);
+
+        TypedArray b = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLayout);
+        int position = b.getInt(R.styleable.PreferenceLayout_position, 3);
+        b.recycle();
+
+        switch (position) {
+            case 0: // Top
+                setLayoutResource(R.layout.preference_material_color_picker_settings_top);
+                break;
+            case 1: // Middle
+                setLayoutResource(R.layout.preference_material_color_picker_settings_middle);
+                break;
+            case 2: // Bottom
+                setLayoutResource(R.layout.preference_material_color_picker_settings_bottom);
+                break;
+            case 3: // Full
+                setLayoutResource(R.layout.preference_material_color_picker_settings);
+                break;
+        }
+
         init(context, attrs);
 
         mContext = context;

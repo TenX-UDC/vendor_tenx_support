@@ -15,6 +15,7 @@ android_library {
         "androidx.recyclerview_recyclerview",
         "SettingsLibMainSwitchPreference",
         "LineagePreferenceLib",
+        "SettingsLib",
     ],
 
     resource_dirs: ["res"],

@@ -104,8 +104,26 @@ public class ProperSeekBarPreference extends Preference implements SeekBar.OnSee
             mValue = mMinValue;
         }
 
+        TypedArray b = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLayout);
+        int position = b.getInt(R.styleable.PreferenceLayout_position, 3);
+        b.recycle();
+
         mSeekBar = new SeekBar(context, attrs);
-        setLayoutResource(R.layout.preference_proper_seekbar);
+
+        switch (position) {
+            case 0: // Top
+                setLayoutResource(R.layout.preference_proper_seekbar_top);
+                break;
+            case 1: // Middle
+                setLayoutResource(R.layout.preference_proper_seekbar_middle);
+                break;
+            case 2: // Bottom
+                setLayoutResource(R.layout.preference_proper_seekbar_bottom);
+                break;
+            case 3: // Full
+                setLayoutResource(R.layout.preference_proper_seekbar);
+                break;
+        }
 
         mContext = context;
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

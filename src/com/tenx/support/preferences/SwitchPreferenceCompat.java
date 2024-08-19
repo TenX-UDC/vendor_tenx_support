@@ -17,10 +17,13 @@
 package com.tenx.support.preferences;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.tenx.support.R;
 
 public class SwitchPreferenceCompat extends androidx.preference.SwitchPreferenceCompat {
 
@@ -29,19 +32,43 @@ public class SwitchPreferenceCompat extends androidx.preference.SwitchPreference
     public SwitchPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init(context, attrs);
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     public SwitchPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
+        init(context, attrs);
     }
 
     public SwitchPreferenceCompat(Context context, AttributeSet attrs) {
         this(context, attrs, androidx.preference.R.attr.switchPreferenceCompatStyle);
+        init(context, attrs);
     }
 
     public SwitchPreferenceCompat(Context context) {
         this(context, null);
+    }
+
+    private void init(Context context, AttributeSet attrs) {
+        TypedArray b = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLayout);
+        int position = b.getInt(R.styleable.PreferenceLayout_position, 3);
+        b.recycle();
+
+        switch (position) {
+            case 0: // Top
+                setLayoutResource(R.layout.tenx_preference_top);
+                break;
+            case 1: // Middle
+                setLayoutResource(R.layout.tenx_preference_middle);
+                break;
+            case 2: // Bottom
+                setLayoutResource(R.layout.tenx_preference_bottom);
+                break;
+            case 3: // Full
+                setLayoutResource(R.layout.tenx_preference);
+                break;
+        }
     }
 
     @Override

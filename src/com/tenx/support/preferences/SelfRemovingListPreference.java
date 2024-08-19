@@ -17,6 +17,7 @@
 package com.tenx.support.preferences;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
 import androidx.preference.ListPreference;
@@ -24,6 +25,8 @@ import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceViewHolder;
 
 import lineageos.preference.ConstraintsHelper;
+
+import com.tenx.support.R;
 
 /**
  * A Preference which can automatically remove itself from the hierarchy
@@ -37,12 +40,14 @@ public abstract class SelfRemovingListPreference extends ListPreference {
         super(context, attrs, defStyle);
         mConstraints = new ConstraintsHelper(context, attrs, this);
         setPreferenceDataStore(new DataStore());
+        init(context, attrs);
     }
 
     public SelfRemovingListPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mConstraints = new ConstraintsHelper(context, attrs, this);
         setPreferenceDataStore(new DataStore());
+        init(context, attrs);
     }
 
     public SelfRemovingListPreference(Context context) {
@@ -103,6 +108,27 @@ public abstract class SelfRemovingListPreference extends ListPreference {
         @Override
         public String getString(String key, String defaultValue) {
             return SelfRemovingListPreference.this.getString(key, defaultValue);
+        }
+    }
+
+    private void init(Context context, AttributeSet attrs) {
+        TypedArray b = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLayout);
+        int position = b.getInt(R.styleable.PreferenceLayout_position, 3);
+        b.recycle();
+
+        switch (position) {
+            case 0: // Top
+                setLayoutResource(R.layout.tenx_preference_top);
+                break;
+            case 1: // Middle
+                setLayoutResource(R.layout.tenx_preference_middle);
+                break;
+            case 2: // Bottom
+                setLayoutResource(R.layout.tenx_preference_bottom);
+                break;
+            case 3: // Full
+                setLayoutResource(R.layout.tenx_preference);
+                break;
         }
     }
 }

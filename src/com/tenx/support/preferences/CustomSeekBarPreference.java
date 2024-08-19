@@ -101,12 +101,30 @@ public class CustomSeekBarPreference extends Preference implements SeekBar.OnSee
             Log.e(TAG, "Invalid interval value", e);
         }
 
+        TypedArray b = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLayout);
+        int position = b.getInt(R.styleable.PreferenceLayout_position, 3);
+        b.recycle();
+
         a.recycle();
         mSeekBar = new SeekBar(context, attrs);
         mSeekBar.setMax(mMax);
         mSeekBar.setMin(mMin);
         mSeekBar.setOnSeekBarChangeListener(this);
-        setLayoutResource(R.layout.preference_custom_seekbar);
+
+        switch (position) {
+            case 0: // Top
+                setLayoutResource(R.layout.preference_custom_seekbar_top);
+                break;
+            case 1: // Middle
+                setLayoutResource(R.layout.preference_custom_seekbar_middle);
+                break;
+            case 2: // Bottom
+                setLayoutResource(R.layout.preference_custom_seekbar_bottom);
+                break;
+            case 3: // Full
+                setLayoutResource(R.layout.preference_custom_seekbar);
+                break;
+        }
     }
 
     protected String getAttributeStringValue(AttributeSet attrs, String namespace, String name,
