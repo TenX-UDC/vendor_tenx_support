@@ -60,7 +60,7 @@ public class ListPreference extends androidx.preference.ListPreference {
 
     private void init(Context context, AttributeSet attrs) {
         TypedArray b = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLayout);
-        int position = b.getInt(R.styleable.PreferenceLayout_position, 3);
+        int position = b.getInt(R.styleable.PreferenceLayout_position, 4);
         b.recycle();
 
         switch (position) {
@@ -76,6 +76,8 @@ public class ListPreference extends androidx.preference.ListPreference {
             case 3: // Full
                 setLayoutResource(R.layout.tenx_preference);
                 break;
+            case 4: // None
+                return;
         }
     }
 }
