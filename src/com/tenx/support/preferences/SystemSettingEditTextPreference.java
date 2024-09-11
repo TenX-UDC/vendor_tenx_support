@@ -17,10 +17,13 @@
 package com.tenx.support.preferences;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import androidx.preference.EditTextPreference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.provider.Settings;
+
+import com.tenx.support.R;
 
 public class SystemSettingEditTextPreference extends EditTextPreference {
     private boolean mAutoSummary = false;
@@ -28,11 +31,13 @@ public class SystemSettingEditTextPreference extends EditTextPreference {
     public SystemSettingEditTextPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
+        init(context, attrs);
     }
 
     public SystemSettingEditTextPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setPreferenceDataStore(new SystemSettingsStore(context.getContentResolver()));
+        init(context, attrs);
     }
 
     public SystemSettingEditTextPreference(Context context) {
@@ -47,6 +52,29 @@ public class SystemSettingEditTextPreference extends EditTextPreference {
     private String getString(String key, String defaultValue) {
         String result = Settings.System.getString(getContext().getContentResolver(), key);
         return result == null ? defaultValue : result;
+    }
+
+    private void init(Context context, AttributeSet attrs) {
+        TypedArray b = context.obtainStyledAttributes(attrs, R.styleable.PreferenceLayout);
+        int position = b.getInt(R.styleable.PreferenceLayout_position, 4);
+        b.recycle();
+
+        switch (position) {
+            case 0: // Top
+                setLayoutResource(R.layout.tenx_preference_top);
+                break;
+            case 1: // Middle
+                setLayoutResource(R.layout.tenx_preference_middle);
+                break;
+            case 2: // Bottom
+                setLayoutResource(R.layout.tenx_preference_bottom);
+                break;
+            case 3: // Full
+                setLayoutResource(R.layout.tenx_preference);
+                break;
+            case 4: // None
+                return;
+        }
     }
 
     @Override
