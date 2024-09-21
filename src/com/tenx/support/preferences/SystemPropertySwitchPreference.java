@@ -19,33 +19,38 @@
 package com.tenx.support.preferences;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.util.AttributeSet;
 
-public class SystemPropertySwitchPreference extends SwitchPreferenceCompat {
+import com.android.settingslib.development.SystemPropPoker;
+
+public class SystemPropertySwitchPreference extends SelfRemovingSwitchPreference {
 
     public SystemPropertySwitchPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setPreferenceDataStore(new SystemPropertiesStore());
     }
 
     public SystemPropertySwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setPreferenceDataStore(new SystemPropertiesStore());
     }
 
     public SystemPropertySwitchPreference(Context context) {
         super(context);
-        setPreferenceDataStore(new SystemPropertiesStore());
     }
 
     @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        // This is what default TwoStatePreference implementation is doing without respecting
-        // real default value:
-        //setChecked(restoreValue ? getPersistedBoolean(mChecked)
-        //        : (Boolean) defaultValue);
-        // Instead, we better do
-        setChecked(restoreValue ? getPersistedBoolean((Boolean) defaultValue)
-                : (Boolean) defaultValue);
+    protected boolean isPersisted() {
+        return !SystemProperties.get(getKey(), "").isEmpty();
+    }
+
+    @Override
+    protected void putBoolean(String key, boolean value) {
+        SystemProperties.set(key, Boolean.toString(value));
+        SystemPropPoker.getInstance().poke();
+    }
+
+    @Override
+    protected boolean getBoolean(String key, boolean defaultValue) {
+        return SystemProperties.getBoolean(key, defaultValue);
     }
 }
