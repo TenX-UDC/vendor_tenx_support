@@ -21,5 +21,7 @@
 
     <!-- Search bar background color -->
     <color name="search_bar_background">?androidprv:attr/materialColorSurfaceBright</color>
+    
+    <color name="tenx_pref_ripple">@android:color/system_accent1_500</color>
 
 </resources>
