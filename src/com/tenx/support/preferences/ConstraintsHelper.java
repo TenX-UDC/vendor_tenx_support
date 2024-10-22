@@ -44,7 +44,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import com.android.internal.derp.hardware.LineageHardwareManager;
 import com.tenx.support.R;
 
 
@@ -174,22 +173,6 @@ public class ConstraintsHelper {
                     rAction = rAction.substring(1);
                 }
                 boolean available = resolveIntent(mContext, rAction);
-                if (available == negated) {
-                    return false;
-                }
-            }
-
-            // Check if a system feature is available
-            String rFeature = a.getString(R.styleable.lineage_SelfRemovingPreference_requiresFeature);
-            if (rFeature != null) {
-                boolean negated = isNegated(rFeature);
-                if (negated) {
-                    rFeature = rFeature.substring(1);
-                }
-                boolean available = rFeature.startsWith("lineagehardware:") ?
-                        LineageHardwareManager.getInstance(mContext).isSupported(
-                                rFeature.substring("lineagehardware:".length())) :
-                        hasSystemFeature(mContext, rFeature);
                 if (available == negated) {
                     return false;
                 }
