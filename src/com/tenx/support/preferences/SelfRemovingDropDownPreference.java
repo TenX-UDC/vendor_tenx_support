@@ -23,8 +23,6 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceViewHolder;
 
-import lineageos.preference.ConstraintsHelper;
-
 /**
  * A Preference which can automatically remove itself from the hierarchy
  * based on constraints set in XML.

@@ -20,9 +20,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import androidx.preference.PreferenceDataStore;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
-
-import lineageos.preference.ConstraintsHelper;
 
 /**
  * A SwitchPreferenceCompat which can automatically remove itself from the hierarchy

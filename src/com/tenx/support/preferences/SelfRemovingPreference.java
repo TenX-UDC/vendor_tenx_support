@@ -21,8 +21,6 @@ import android.util.AttributeSet;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
-import lineageos.preference.ConstraintsHelper;
-
 /**
  * A Preference which can automatically remove itself from the hierarchy
  * based on constraints set in XML.

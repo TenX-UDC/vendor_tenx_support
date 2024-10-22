@@ -29,8 +29,6 @@ import android.util.Log;
 import java.util.List;
 import java.util.Objects;
 
-import lineageos.preference.ConstraintsHelper;
-
 /**
  * A RemotePreference is a view into preference logic which lives in another
  * process. The primary use case for this is at the platform level where

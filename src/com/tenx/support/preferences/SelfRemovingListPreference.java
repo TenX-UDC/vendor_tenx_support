@@ -24,8 +24,6 @@ import androidx.preference.ListPreference;
 import androidx.preference.PreferenceDataStore;
 import androidx.preference.PreferenceViewHolder;
 
-import lineageos.preference.ConstraintsHelper;
-
 import com.tenx.support.R;
 
 /**
